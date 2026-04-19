@@ -29,7 +29,11 @@ for key,value in monitorList.items():
         continue
     if "Established" in respList:
         msg = f"{respList[-2]}"
-        sendHook(value, msg)
+        sendHook(value, msg, True)
         print(f"{key} is up. Successfully sent hook.")
+    else:
+        msg = f"{respList[-2]}_STATE_DUE_TO_{respList[-1].upper()}"
+        sendHook(value, msg, False)
+        print(f"{key} is down. Successfully sent hook.")
 
 print("Completed.")
