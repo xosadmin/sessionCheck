@@ -1,13 +1,14 @@
-# sessionCheck
-A python-based automated BGP Session Uptime Monitor - Work with API webhook.
+# sessionCheck  
+A Python-based automated BIRD2 BGP session uptime monitor with API webhook support.  
   
 ## Installation
-- Clone this project
-- Use ``install.sh`` by ``bash install.sh``
-- Finish ``config.yaml``. For more detail, please refers to [example-config.yaml](https://github.com/xosadmin/sessionCheck/blob/main/example-config.yaml)
-- Use ``systemctl start axbgpmon`` to start the service
+- Clone this project.
+- Run `bash install.sh`.
+- Complete `config.yaml`. For more details, refer to [example-config.yaml](https://github.com/xosadmin/sessionCheck/blob/main/example-config.yaml).
+- Start the service with `systemctl start axbgpmon`.
   
-## Note
-- This monitor is tested and passed with Uptime Kuma, and works with any API webhook with GET method.
-- This monitor requires ``python3`` and ``python3-pip`` package, please install it before install this monitor.
-  
+## Notes
+- This monitor has been tested with Uptime Kuma and should also work with any API webhook that accepts GET requests.
+- Each webhook push includes a `msg` field. The value of `msg` is the time when the session was last established, as reported by BIRD.
+- For use with Uptime Kuma, it is recommended to set the `Heartbeat Interval` of the passive push monitor to 120 seconds.
+- This monitor requires the `python3` and `python3-pip` packages. Please install them before running the installer.
