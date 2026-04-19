@@ -28,7 +28,7 @@ for key,value in monitorList.items():
         print(f"Error when splitting response for {key}.")
         continue
     if "Established" in respList:
-        msg = f"Established_Since_{respList[-2]}"
+        msg = f"{respList[-2]}"
         sendHook(value, msg)
         print(f"{key} is up. Successfully sent hook.")
 
