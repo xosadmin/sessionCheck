@@ -12,7 +12,7 @@ if [[ $(dpkg -l | grep -oc "python") -eq "0" ]]; then
 fi
 
 echo "Installing dependencies..."
-pip3 install -r requirements.txt --break-system-package
+pip3 install -r requirements.txt --break-system-packages
 
 echo "Coping files..."
 cp -r utils "$dstFolder"

@@ -18,7 +18,7 @@ if len(monitorList) == 0:
 
 for key,value in monitorList.items():
     print(f"Getting session {key} status...")
-    cmd = ["birdc","show","proto",key,"|","tail","-n1"]
+    cmd = ["birdc","show","proto",key]
     response = getBirdResponse(cmd)
     if not response:
         print(f"Error occurred while checking {key}. ")
