@@ -1,0 +1,16 @@
+[Unit]
+Description=AX BGP Monitor
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/bgpMonitor
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/bin/bash -c 'while true; do /usr/bin/python3 /opt/bgpMonitor/main.py; sleep 30; done'
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
