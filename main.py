@@ -32,7 +32,7 @@ for key,value in monitorList.items():
         sendHook(value, msg, True)
         print(f"{key} is up. Successfully sent hook.")
     else:
-        msg = f"{respList[-2]}_STATE_DUE_TO_{respList[-1].upper()}"
+        msg = f"{respList[-2]}_STATE_DUE_TO_{respList[-1]}"
         sendHook(value, msg, False)
         print(f"{key} is down. Successfully sent hook.")
 

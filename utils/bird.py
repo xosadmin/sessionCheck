@@ -10,16 +10,16 @@ def outputLastLine(raw_output):
 
 def getBirdResponse(cmd):
     if not cmd or not isinstance(cmd, list):
-        return False
+        return None
     try:
         response = subprocess.check_output(cmd, text=True, stderr=subprocess.STDOUT, timeout=10)
         return outputLastLine(response)
     except Exception as e:
         print(f"Error while contacting bird: {e}")
-        return False
+        return None
 
 def statToList(orig):
     if not orig or not isinstance(orig, str):
         return []
-    replaceSpace = re.sub(" +"," ",orig)
-    return replaceSpace.split(" ")
+    orig = orig.strip()
+    return re.split(r"\s+", orig, maxsplit=5)
