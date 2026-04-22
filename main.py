@@ -4,6 +4,7 @@ from utils.hooks import sendHook
 from utils.bird import getBirdResponse, statToList
 
 configLocation = os.path.abspath("config.yaml")
+rpkiStats = ["Sync-Start", "Sync-Running"]
 
 if not os.path.exists(configLocation):
     print("Cannot find config file.")
@@ -31,6 +32,9 @@ for key,value in monitorList.items():
         msg = f"{respList[-2]}"
         sendHook(value, msg, True)
         print(f"{key} is up. Successfully sent hook.")
+    elif "RPKI" in respList[2] and respList[-1] in rpkiStats:
+        print(f"RPKI session {key} is refreshing.")
+        continue
     else:
         msg = f"{respList[-2]}_STATE_DUE_TO_{respList[-1]}"
         sendHook(value, msg, False)
