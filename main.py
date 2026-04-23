@@ -32,7 +32,7 @@ for key,value in monitorList.items():
         msg = f"{respList[-2]}"
         sendHook(value, msg, True)
         print(f"{key} is up. Successfully sent hook.")
-    elif "RPKI" in respList[2] and respList[-1] in rpkiStats:
+    elif "RPKI" in respList[1] and respList[-1] in rpkiStats:
         print(f"RPKI session {key} is refreshing.")
         sendHook(value, f"RPKI_REFRESHING_{respList[-1]}", True)
         continue
