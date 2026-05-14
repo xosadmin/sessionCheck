@@ -11,7 +11,7 @@ def composeURL(origURL,msg,ifUp):
             msg = re.sub(" ", "_", msg)
         newURL = tempURL + "?status=up&msg=Established_since_" + msg + "&ping="
     else:
-        if re.match("[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{1,}",msg):
+        if re.match(r"[0-9]{2}:[0-9]{2}:[0-9]{2}\.[0-9]{1,}",msg):
             msg = msg.replace("_DUE_TO_","_ON_")
         if "BGP Error:" in msg:
             msg = msg.replace("BGP Error: ", "")
