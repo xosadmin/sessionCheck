@@ -1,4 +1,6 @@
-import re, requests
+import re, requests, urllib3
+
+urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
 def composeURL(origURL,msg,ifUp):
     tempURL = origURL.split("?")[0]
@@ -20,13 +22,14 @@ def composeURL(origURL,msg,ifUp):
         newURL = tempURL + "?status=down&msg=" + msg + "&ping="
     return newURL
 
-def sendHook(url, msg, ifUp=False):
+def sendHook(url, msg, ifUp=False, verifySSL=False):
     try:
         newURL = composeURL(url, msg, ifUp)
-        response = requests.get(newURL)
+        response = requests.get(newURL, verify=verifySSL, timeout=10)
         if response.status_code == 200:
             return True
         else:
+            print(f"Error: {url} - {response.status_code} Error")
             return False
     except Exception as e:
         print(f"Error while sending hook: {e}")

@@ -1,3 +1,5 @@
+control:
+  verifyssl: False
 monitors:
   sessionName: hookurl1
   sessionName2: hookurl2

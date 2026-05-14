@@ -11,10 +11,11 @@ if not os.path.exists(configLocation):
     sys.exit(1)
 
 configs = readConf(configLocation)
+syssettings = configs.get("control",{})
 monitorList = configs.get('monitors',{})
 
-if len(monitorList) == 0:
-    print("No monitors configured")
+if len(monitorList) == 0 or monitorList == {}:
+    print("No monitors/system settings configured")
     sys.exit(1)
 
 for key,value in monitorList.items():
@@ -30,15 +31,15 @@ for key,value in monitorList.items():
         continue
     if "Established" in respList:
         msg = f"{respList[-2]}"
-        sendHook(value, msg, True)
+        sendHook(value, msg, True, syssettings.get("verifyssl", False))
         print(f"{key} is up. Successfully sent hook.")
     elif "RPKI" in respList[1] and respList[-1] in rpkiStats:
         print(f"RPKI session {key} is refreshing.")
-        sendHook(value, f"RPKI_REFRESHING_{respList[-1]}", True)
+        sendHook(value, f"RPKI_REFRESHING_{respList[-1]}", True, syssettings.get("verifyssl", False))
         continue
     else:
         msg = f"{respList[-2]}_STATE_DUE_TO_{respList[-1]}"
-        sendHook(value, msg, False)
+        sendHook(value, msg, False, syssettings.get("verifyssl", False))
         print(f"{key} is down. Successfully sent hook.")
 
 print("Completed.")
